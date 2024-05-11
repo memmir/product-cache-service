@@ -29,6 +29,8 @@ spring:
     redis:
       host: localhost
       port: 6379
+#Bilgisayara yüklemeden docker da redisi aya kaldırmak için: redis.yml dosyasının bulunduğu klasörde cmd yi açıyoruz ve aşağıdaki komutu çalıştırıyoruz:
+#docker-compose --compatibility -p stock-management -f redis.yml up
 
 feign:
   product-service:

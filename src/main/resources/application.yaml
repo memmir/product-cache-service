@@ -10,10 +10,10 @@ spring:
 
 logging: ##Uygulamadaki logları takip edebilmek için eklenen conf.
   level:
-    root: debug
+    ##root: debug
     ##root: off
-    ##com.eleiatech:debug ## bu şekilde diyerek daha az ve daha az karışık log görebiliriz.
-
+      com.microshop: debug
+    ##üstteki şekilde diyerek daha az ve daha az karışık log görebiliriz.
 server:
   port: 9791
 
@@ -56,7 +56,7 @@ spring:
     type: redis
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
 
 feign:

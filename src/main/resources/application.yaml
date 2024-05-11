@@ -33,7 +33,7 @@ spring:
 feign:
   product-service:
     name: product-service
-    url: http://localhost:8762
+    url: http://localhost:9788
 
 eureka:
   instance:

@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
             Optional<Product> optionalProduct = productRepository.findById(productId);
             if(optionalProduct.isPresent()){ //Burada gelen datanının içinin dolu olup olmadığını test ediyoruz.
                 product = optionalProduct.get();
+                log.info("Veri  redis server dan getirildi");
                 //Veri cache den getirldi. Yani Redis den getirldi.
             }else { // Eğer veri yoksa productservice projesinden çekeceğiz veriyi ve sonra redise kaydedeceğiz.
                 log.info("Veri  product service den getirildi");

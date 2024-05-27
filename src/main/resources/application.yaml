@@ -62,7 +62,7 @@ spring:
 feign:
   product-service:
     name: product-service
-    url: http://zuul-edge-server:8762
+    url: http://zuul-edge-server:1002
 
 
 eureka:
@@ -72,4 +72,4 @@ eureka:
     lease-renewal-interval-in-seconds: 10
   client:
     service-url:
-      default-zone: http://eureka-server:8761/eureka/
+      default-zone: http://eureka-server:1003/eureka/

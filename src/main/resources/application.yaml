@@ -5,8 +5,8 @@ spring:
     active: localhost
   main:
     allow-bean-definition-overriding: true
-  info:
-    component: Product Cache Service
+info:
+  component: Product Cache Service
 
 logging: ##Uygulamadaki logları takip edebilmek için eklenen conf.
   level:
@@ -15,7 +15,7 @@ logging: ##Uygulamadaki logları takip edebilmek için eklenen conf.
       com.microshop: debug
     ##üstteki şekilde diyerek daha az ve daha az karışık log görebiliriz.
 server:
-  port: 9791
+  port: 4044
 
 ---
 
@@ -30,12 +30,21 @@ spring:
       host: localhost
       port: 6379
 #Bilgisayara yüklemeden docker da redisi aya kaldırmak için: redis.yml dosyasının bulunduğu klasörde cmd yi açıyoruz ve aşağıdaki komutu çalıştırıyoruz:
-#docker-compose --compatibility -p stock-management -f redis-product.yml up
+#docker-compose --compatibility -p stock-management -f redis.yml up
 
+#REDIS verileri izleme komutları
+#docker ps
+#docker exec -it {CONTAINER_ID} redis-cli
+#keys*
+#smembers {KEY}
+
+
+
+# hash için hgetall Product:1 şeklinde değerleri öğrenebiliriz.
 feign:
   product-service:
     name: product-service
-    url: http://localhost:9788
+    url: http://localhost:4041
 
 eureka:
   instance:
@@ -44,7 +53,7 @@ eureka:
     lease-renewal-interval-in-seconds: 10
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:4042/eureka/
 
 
 ---
@@ -62,14 +71,14 @@ spring:
 feign:
   product-service:
     name: product-service
-    url: http://zuul-edge-server:1002
+    url: http://zuul-edge-server:4041
 
 
 eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:4042/eureka
   instance:
     instance-id: ${spring.application.name}:${random.uuid}
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10
-  client:
-    service-url:
-      default-zone: http://eureka-server:1003/eureka/
